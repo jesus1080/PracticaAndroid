@@ -50,7 +50,7 @@ fun Tarjeta(){
 @Composable
 fun ImagePre() {
     Image(
-        painter = painterResource(R.drawable.otra),
+        painter = painterResource(R.drawable.pepito),
         contentDescription = "Contact profile picture",
         modifier = Modifier
             .size(200.dp)
