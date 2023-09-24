@@ -24,6 +24,10 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.rounded.Email
+import androidx.compose.material.icons.rounded.Phone
+import androidx.compose.material.icons.rounded.Share
+import androidx.compose.ui.graphics.vector.ImageVector
 
 
 class MainActivity : ComponentActivity() {
@@ -44,7 +48,7 @@ fun Tarjeta(){
         verticalArrangement = Arrangement.Center
     ){
         ImagePre()
-        Datos(name = "Jesus Ruiz Velasco", ocupacion = "Cientifico de Datos")
+        Datos(name = "Pepito Dino Dino", ocupacion = "Cientifico de Datos")
     }
 }
 @Composable
@@ -70,45 +74,31 @@ fun Datos(name: String, ocupacion: String) {
 fun Contacto() {
     Column(
         modifier = Modifier
-            .size(200.dp)
-            .offset(x = 95.dp, y = 630.dp),
+            .size(300.dp)
+            .offset(x = 50.dp, y = 500.dp)
+            .padding(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Bottom
     ) {
-        Telefono(item = "33455666")
-        Correo(item = "pepito@mail.com")
-        Redes(item = "@pepito22")
+
+        Contact(icon = Icons.Rounded.Phone, item = "322222222")
+        Contact(icon = Icons.Rounded.Email, item = "pepito@mail.com")
+        Contact(icon = Icons.Rounded.Share, item = "@dino4444")
     }
 }
 
 @Composable
-fun Telefono(item:String){
+fun Contact(icon:ImageVector,item:String){
+
     Row(){
-        Icon(imageVector = Icons.Default.Phone, contentDescription = item,modifier = Modifier.padding(8.dp))
+        Icon(imageVector = icon, contentDescription = item)
+        Spacer(modifier = Modifier.size(30.dp))
         Text(text = item)
     }
     
 }
-@Composable
-fun Correo(item:String){
-    Row(){
-        Icon(imageVector = Icons.Default.Email,
-            contentDescription = item,
-            modifier = Modifier.padding(8.dp)
-        )
-        Text(text = item)
-    }
 
-}
 
-@Composable
-fun Redes(item:String){
-    Row(){
-        Icon(imageVector = Icons.Default.Share, contentDescription = item,modifier = Modifier.padding(8.dp))
-        Text(text = item)
-    }
-
-}
 
 
 
