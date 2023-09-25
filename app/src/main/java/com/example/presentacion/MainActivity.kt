@@ -14,6 +14,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
@@ -27,16 +28,32 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.material.icons.rounded.Share
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
+import androidx.compose.material.Surface
+import androidx.compose.ui.layout.ContentScale
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Tarjeta()
-            Contacto()
+            Presentacion()
         }
+    }
+}
+
+@Composable
+fun Presentacion(){
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color(0xFFF5FFFA)
+    ) {
+        Tarjeta()
+        Contacto()
     }
 }
 
@@ -48,7 +65,7 @@ fun Tarjeta(){
         verticalArrangement = Arrangement.Center
     ){
         ImagePre()
-        Datos(name = "Pepito Dino Dino", ocupacion = "Cientifico de Datos")
+        Datos(name = "Pepito Perez Dino", ocupacion = "Cientifico de Datos")
     }
 }
 @Composable
@@ -56,57 +73,72 @@ fun ImagePre() {
     Image(
         painter = painterResource(R.drawable.pepito),
         contentDescription = "Contact profile picture",
+        contentScale = ContentScale.Crop,
         modifier = Modifier
-            .size(200.dp)
-            .clip(CircleShape)
-   )
+            .size(150.dp)
+            .clip(RoundedCornerShape(16.dp))
+    )
 }
 
 @Composable
 fun Datos(name: String, ocupacion: String) {
-    Column() {
-        Text(name)
-        Text(ocupacion)
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(name, fontSize = 25.sp, fontFamily = FontFamily.Monospace, color = Color.Blue)
+        Text(ocupacion,fontFamily = FontFamily.Serif, textAlign = TextAlign.Center)
     }
 
 }
 @Composable
 fun Contacto() {
-    Column(
+    Row(
         modifier = Modifier
-            .size(300.dp)
-            .offset(x = 50.dp, y = 500.dp)
+            .fillMaxSize()
             .padding(30.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Bottom
-    ) {
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.Bottom
 
-        Contact(icon = Icons.Rounded.Phone, item = "322222222")
-        Contact(icon = Icons.Rounded.Email, item = "pepito@mail.com")
-        Contact(icon = Icons.Rounded.Share, item = "@dino4444")
+    ) {
+        Iconos()
+        ContacText()
     }
 }
 
 @Composable
-fun Contact(icon:ImageVector,item:String){
+fun Iconos(){
 
-    Row(){
-        Icon(imageVector = icon, contentDescription = item)
-        Spacer(modifier = Modifier.size(30.dp))
-        Text(text = item)
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ){
+        Icon(imageVector = Icons.Rounded.Phone, contentDescription = "Phone",tint = Color.Blue)
+        Icon(imageVector = Icons.Rounded.Share, contentDescription = "Share",tint = Color.Blue)
+        Icon(imageVector = Icons.Rounded.Email, contentDescription = "Email",tint = Color.Blue)
     }
     
 }
-
-
-
+@Composable
+fun ContacText(){
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.Start,
+    ) {
+        Text(text = "322222222", modifier = Modifier.padding(start = 9.dp, top = 0.dp,
+            end = 0.dp, bottom = 4.dp),fontFamily = FontFamily.Serif)
+        Text(text = "pepito@mail.com", modifier = Modifier.padding(start = 9.dp, top = 0.dp,
+            end = 0.dp, bottom = 7.dp, ),fontFamily = FontFamily.Serif)
+        Text(text = "@pepito", modifier = Modifier.padding(start = 9.dp, top = 0.dp,
+            end = 0.dp, bottom = 2.dp), fontFamily = FontFamily.Serif)
+    }
+}
 
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     PresentacionTheme {
-        Tarjeta()
-        Contacto()
+        Presentacion()
     }
 }
